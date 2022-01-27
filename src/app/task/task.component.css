@@ -1,0 +1,8 @@
+div.row.task{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.strike{
+  text-decoration: line-through
+}
