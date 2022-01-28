@@ -11,6 +11,7 @@ export class TaskComponent implements OnInit {
   @Input() t !:{desc:string, priority: string, due:Date};
   @Input() ind !: number;
   @Output() onDelete = new EventEmitter<number>();
+  @Output() onEdit = new EventEmitter<number>();
 
   isDone = false;
 
@@ -25,5 +26,9 @@ export class TaskComponent implements OnInit {
 
   deleteTask(){
     this.onDelete.emit(this.ind);
+  }
+
+  editTask(){
+    this.onEdit.emit(this.ind);
   }
 }

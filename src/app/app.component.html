@@ -1,7 +1,7 @@
 <div class=container>
   <div class="row">
     <h1>ToDo</h1>
-    <form [formGroup]="todoForm" (ngSubmit)="addTask()">
+    <form [formGroup]="todoForm" (ngSubmit)="isEdit? saveEditTask() : addTask()">
       <label for="desc">Description:  </label>
       <input type="text" formControlName="desc" id="desc">
       <br/>
@@ -19,13 +19,14 @@
       <input type="date" formControlName="due" id="due">
       <br/>
       <br/>
-      <button type="submit" [disabled]="todoForm.invalid">Save</button>
+      <button *ngIf="!isEdit" type="submit" [disabled]="todoForm.invalid">Save</button>
+      <button *ngIf="isEdit" type="submit" [disabled]="todoForm.invalid">Edit</button>
     </form>
   </div>
   <br/>
   <br/>
   <div class="row tasks" style="border: solid;">
     <h1>{{listofTodo.length>1? "Tasks":"Task"}}</h1>
-    <app-task *ngFor="let todo of listofTodo let i=index" [t] ="todo" [ind]="i" (onDelete)="removeTask($event)"></app-task>
+    <app-task *ngFor="let todo of listofTodo let i=index" [t] ="todo" [ind]="i" (onDelete)="removeTask($event)" (onEdit)="editTask($event)"></app-task>
   </div>
 </div>

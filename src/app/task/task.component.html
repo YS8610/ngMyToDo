@@ -2,6 +2,6 @@
   <div class="row task" [ngClass]="{strike: isDone}">
     <h2 ><input type="checkbox" name="done" (change)="onDone($event)" >{{t.desc}}</h2>
     <div class="col-md-6">{{t.priority}}</div>
-    <div class="col-md-6 text-end">{{t.due}} <button (click)="deleteTask()">Delete</button></div>
+    <div class="col-md-6 text-end">{{t.due}} <button (click)="editTask()">Edit</button>  <button (click)="deleteTask()">Delete</button></div>
   </div>
 </div>

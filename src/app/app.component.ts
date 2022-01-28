@@ -12,6 +12,8 @@ export class AppComponent implements OnInit {
 
   todoForm !: FormGroup;
   listofTodo : {desc:string , priority:string, due :Date }[] = [];
+  isEdit = false;
+  editIndex !: number;
 
 
   constructor(private fb : FormBuilder){};
@@ -48,5 +50,33 @@ export class AppComponent implements OnInit {
   removeTask(e:number){
     console.log(e);
     this.listofTodo.splice(e,1);
+  }
+
+  editTask(e:number){
+    this.todoForm.setValue({
+      desc : this.listofTodo[e].desc,
+      priority : this.listofTodo[e].priority,
+      due : this.listofTodo[e].due
+    });
+    this.isEdit = true;
+    this.editIndex = e;
+  }
+
+  saveEditTask(){
+    const todo = this.todoForm.value;
+    const todayString = new Date().toISOString();
+    const todayDate = new Date(todayString.substring(0,10));
+    const dueDate = new Date(todo.due);
+
+    if (dueDate.getTime() < todayDate.getTime()){
+      alert("Task with due date in the past cannot be saved");
+    }
+    else{
+      this.listofTodo[this.editIndex].desc = todo.desc;
+      this.listofTodo[this.editIndex].priority = todo.priority;
+      this.listofTodo[this.editIndex].due = todo.due;
+      this.todoForm.reset();
+      this.isEdit = false;
+    }
   }
 }
