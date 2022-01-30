@@ -1,7 +1,17 @@
-<div class="container">
-  <div class="row task" [ngClass]="{strike: isDone}">
-    <h2 ><input type="checkbox" name="done" (change)="onDone($event)" >{{t.desc}}</h2>
-    <div class="col-md-6">{{t.priority}}</div>
-    <div class="col-md-6 text-end">{{t.due}} <button (click)="editTask()">Edit</button>  <button (click)="deleteTask()">Delete</button></div>
-  </div>
-</div>
+<mat-card  [ngClass]="{strike: isDone}">
+  <mat-card-title>
+    <input type="checkbox" name="done" (change)="onDone($event)" > {{t.desc}}
+  </mat-card-title>
+  <mat-card-content>
+    <div fxLayout="row" fxLayoutAlign="space-between center" >
+      <div >{{t.priority}}</div>
+      <div >{{t.due}} </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="end center">
+      <mat-card-actions >
+        <button (click)="editTask()" mat-mini-fab color="primary" ><mat-icon>edit_note</mat-icon></button>
+        <button (click)="deleteTask()" mat-mini-fab color="primary" ><mat-icon>delete</mat-icon></button>
+      </mat-card-actions>
+    </div>
+  </mat-card-content>
+</mat-card>

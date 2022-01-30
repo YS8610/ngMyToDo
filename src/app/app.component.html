@@ -1,32 +1,55 @@
-<div class=container>
-  <div class="row">
-    <h1>ToDo</h1>
-    <form [formGroup]="todoForm" (ngSubmit)="isEdit? saveEditTask() : addTask()">
-      <label for="desc">Description:  </label>
-      <input type="text" formControlName="desc" id="desc">
-      <br/>
-      <br/>
-      <label for="priority">Priority: </label>
-      <br/>
-      <input type="radio" id="low" formControlName="priority" value="low"> Low
-      <br/>
-      <input type="radio" id="Medium" formControlName="priority" value="medium"> Medium
-      <br/>
-      <input type="radio" id="High" formControlName="priority" value="high"> High
-      <br/>
-      <br/>
-      <label for="due">Due:  </label>
-      <input type="date" formControlName="due" id="due">
-      <br/>
-      <br/>
-      <button *ngIf="!isEdit" type="submit" [disabled]="todoForm.invalid">Save</button>
-      <button *ngIf="isEdit" type="submit" [disabled]="todoForm.invalid">Edit</button>
-    </form>
+<div fxLayout="row" fxLayoutAlign="center center" >
+  <h1>ToDo</h1>
+</div>
+
+<form [formGroup]="todoForm" (ngSubmit)="isEdit? saveEditTask() : addTask()">
+  <!-- Description section -->
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <mat-form-field appearance="fill">
+      <mat-label for="desc">Description:</mat-label>
+      <input type="text" formControlName="desc" id="desc" matInput placeholder="Sleep">
+      <mat-error *ngIf="todoForm.get('desc')?.hasError('required')">Description is Required</mat-error>
+    </mat-form-field>
   </div>
-  <br/>
-  <br/>
-  <div class="row tasks" style="border: solid;">
-    <h1>{{listofTodo.length>1? "Tasks":"Task"}}</h1>
+  <!-- Radio Button Section -->
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <label id="SelectPriority"> Priority: </label>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center center" >
+    <mat-radio-group aria-labelledby="SelectPriority" formControlName="priority" >
+      <mat-radio-button value="low">Low</mat-radio-button>
+      <mat-radio-button value="medium">Medium</mat-radio-button>
+      <mat-radio-button value="high">High</mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <!-- Due Date Section -->
+  <!-- <mat-form-field appearance="fill">
+    <mat-label>Due:</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="due">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    {{todoForm.value.due}}
+  </mat-form-field> -->
+  <div fxLayout="row" fxLayoutAlign="center center" style="margin-top:5px;">
+    <div fxLayout="column" fxLayoutAlign="space-between center">
+      <div>
+        <label for="due"> Date: </label>
+      </div>
+      <div>
+        <input type="date" formControlName="due" id="due">
+      </div>
+    </div>
+  </div>
+  <!-- Submit button -->
+  <div fxLayout="row" fxLayoutAlign="center center" style="margin-top:5px;">
+    <button mat-raised-button color="primary" type="submit" [disabled]="todoForm.invalid">{{isEdit? "Update" : "Save"}}</button>
+  </div>
+</form>
+
+<div fxLayout="row" fxLayoutAlign="center">
+  <mat-card fxFlex="400px">
+    <mat-card-title>{{listofTodo.length>1? "Tasks":"Task"}}</mat-card-title>
+    <p *ngIf="listofTodo.length==0">You seem to be too free</p>
     <app-task *ngFor="let todo of listofTodo let i=index" [t] ="todo" [ind]="i" (onDelete)="removeTask($event)" (onEdit)="editTask($event)"></app-task>
-  </div>
+  </mat-card>
 </div>

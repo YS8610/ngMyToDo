@@ -9,12 +9,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class AppComponent implements OnInit {
   title = 'ngMyToDo';
 
-
   todoForm !: FormGroup;
   listofTodo : {desc:string , priority:string, due :Date }[] = [];
   isEdit = false;
   editIndex !: number;
-
 
   constructor(private fb : FormBuilder){};
 
@@ -33,7 +31,6 @@ export class AppComponent implements OnInit {
     const todayString = new Date().toISOString();
     const todayDate = new Date(todayString.substring(0,10));
     const dueDate = new Date(todo.due);
-
     if (dueDate.getTime() < todayDate.getTime()){
       alert("Task with due date in the past cannot be added");
     }
