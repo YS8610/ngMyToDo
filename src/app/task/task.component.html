@@ -10,7 +10,7 @@
     <div fxLayout="row" fxLayoutAlign="end center">
       <mat-card-actions >
         <button (click)="editTask()" mat-mini-fab color="primary" ><mat-icon>edit_note</mat-icon></button>
-        <button (click)="deleteTask()" mat-mini-fab color="primary" ><mat-icon>delete</mat-icon></button>
+        <button (click)="deleteTask()" mat-mini-fab color="primary" [disabled]="editing"><mat-icon>delete</mat-icon></button>
       </mat-card-actions>
     </div>
   </mat-card-content>

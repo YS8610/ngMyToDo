@@ -10,6 +10,7 @@ export class TaskComponent implements OnInit {
 
   @Input() t !:{desc:string, priority: string, due:Date};
   @Input() ind !: number;
+  @Input() editing!:boolean;
   @Output() onDelete = new EventEmitter<number>();
   @Output() onEdit = new EventEmitter<number>();
 

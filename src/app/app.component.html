@@ -50,6 +50,6 @@
   <mat-card fxFlex="400px">
     <mat-card-title>{{listofTodo.length>1? "Tasks":"Task"}}</mat-card-title>
     <p *ngIf="listofTodo.length==0">You seem to be too free</p>
-    <app-task *ngFor="let todo of listofTodo let i=index" [t] ="todo" [ind]="i" (onDelete)="removeTask($event)" (onEdit)="editTask($event)"></app-task>
+    <app-task *ngFor="let todo of listofTodo let i=index" [t] ="todo" [ind]="i" [editing]="isEdit" (onDelete)="removeTask($event)" (onEdit)="editTask($event)"></app-task>
   </mat-card>
 </div>
