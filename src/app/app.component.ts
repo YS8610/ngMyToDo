@@ -14,7 +14,11 @@ export class AppComponent implements OnInit {
   isEdit = false;
   editIndex !: number;
 
-  constructor(private fb : FormBuilder){};
+  constructor(private fb : FormBuilder){
+    if (localStorage.getItem("todos")){
+      this.listofTodo = JSON.parse( <string>localStorage.getItem("todos") );
+    }
+  };
 
   ngOnInit(): void {
     this.todoForm = this.fb.group(
@@ -40,6 +44,7 @@ export class AppComponent implements OnInit {
         priority:todo.priority,
         due: todo.due
       });
+      this.saveToDoLocalStorage(this.listofTodo);
       this.todoForm.reset();
     }
   }
@@ -47,6 +52,7 @@ export class AppComponent implements OnInit {
   removeTask(e:number){
     console.log(e);
     this.listofTodo.splice(e,1);
+    this.saveToDoLocalStorage(this.listofTodo);
   }
 
   editTask(e:number){
@@ -74,6 +80,11 @@ export class AppComponent implements OnInit {
       this.listofTodo[this.editIndex].due = todo.due;
       this.todoForm.reset();
       this.isEdit = false;
+      this.saveToDoLocalStorage(this.listofTodo);
     }
+  }
+
+  saveToDoLocalStorage( todolist: {desc:string , priority:string, due :Date }[] ):void{
+    localStorage.setItem("todos", JSON.stringify(todolist));
   }
 }
