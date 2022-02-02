@@ -1,7 +1,7 @@
 # NgMyToDo
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.4.
-Sample website = https://ys8610.github.io/NgMyToDo  
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.4.  
+Sample website = https://ys8610.github.io/ngMyToDo/  
 
 ## Development server
 
